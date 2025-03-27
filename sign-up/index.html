@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../code-alt-regular-24.png">
+    <title>PersonalPortfolio - Sign Up</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="scroll-progress"></div>
+    <nav>
+        <div class="nav-container">
+            <a href="../index.html" class="logo">
+                <i class='bx bx-code-alt'></i>
+                CodeMarket
+            </a>
+            <div class="menu-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+            <div class="nav-elements">
+                <ul class="nav-links">
+                    <li><a href="../index.html"><i class='bx bx-home'></i>Home</a></li>
+                    <li><a href="../products/index.html"><i class='bx bx-store'></i>Products</a></li>
+                    <li><a href="../about/index.html"><i class='bx bx-info-circle'></i>About</a></li>
+                    <li><a href="../contact/index.html"><i class='bx bx-envelope'></i>Contact</a></li>
+                </ul>
+                <div class="auth-buttons">
+                    <a href="../sign-in/index.html" class="btn-signin">
+                        <i class='bx bx-user'></i>
+                        Sign In
+                    </a>
+                    <a href="index.html" class="btn-signup active">
+                        <i class='bx bx-user-plus'></i>
+                        Sign Up
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <section class="auth-section">
+            <div class="auth-container">
+                <h1>Create Account</h1>
+                <p>Join our community of developers</p>
+                
+                <form id="signupForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    </div>
+                    <div class="form-options">
+                        <label class="terms">
+                            <input type="checkbox" name="terms" required>
+                            I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-submit">Create Account</button>
+                </form>
+
+                <div class="social-auth">
+                    <p>Or sign up with</p>
+                    <div class="social-buttons">
+                        <button class="social-btn google">
+                            <i class='bx bxl-google'></i>
+                            Google
+                        </button>
+                        <button class="social-btn github">
+                            <i class='bx bxl-github'></i>
+                            GitHub
+                        </button>
+                    </div>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Already have an account? <a href="../sign-in/index.html">Sign in</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>CodeMarket</h3>
+                    <p>Your trusted partner in digital solutions. Quality code for quality projects.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="../products/index.html">Products</a></li>
+                        <li><a href="../about/index.html">About Us</a></li>
+                        <li><a href="../contact/index.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: support@codemarket.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class='bx bxl-facebook'></i></a>
+                        <a href="#" class="social-link"><i class='bx bxl-twitter'></i></a>
+                        <a href="#" class="social-link"><i class='bx bxl-linkedin'></i></a>
+                        <a href="#" class="social-link"><i class='bx bxl-github'></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 CodeMarket. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navElements = document.querySelector('.nav-elements');
+        
+        menuToggle.addEventListener('click', () => {
+            navElements.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            console.log('Sign up attempt:', { name, email, password });
+            
+            localStorage.setItem('userSession', JSON.stringify({
+                name,
+                email,
+                isLoggedIn: true,
+                timestamp: new Date().getTime()
+            }));
+
+            window.location.href = '../index.html';
+        });
+
+        document.querySelector('.social-btn.google').addEventListener('click', function() {
+            console.log('Google sign up clicked');
+        });
+
+        document.querySelector('.social-btn.github').addEventListener('click', function() {
+            console.log('GitHub sign up clicked');
+        });
+    </script>
+</body>
+</html> 
